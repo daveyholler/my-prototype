@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import '@elastic/eui/dist/eui_theme_amsterdam_light.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

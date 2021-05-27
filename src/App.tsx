@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { EuiBadge, EuiPanel, EuiRange } from '@elastic/eui';
 
 function App() {
+  const [value, setValue] = useState(1);
+  const [badgeDetails, setBadgeDetails] = useState({text: "That's a bad slide", color: "danger"});
+
+  const onChange = (event: any) => {
+    setValue(event.target.value)
+    if (event.target.value < 4) {
+      setBadgeDetails({text: "That's a bad slide", color: "danger"})
+    } else if (event.target.value >= 4 && event.target.value <= 7) {
+      setBadgeDetails({text: "Meh meh meh", color: "warning"})
+    } else {
+      setBadgeDetails({text: "Much amaze!", color: "secondary"})
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ margin: '5rem auto', maxWidth: '60rem' }}>
+      <EuiPanel style={{ display: 'flex', flexDirection: "column", alignItems: 'center', justifyContent: 'center' }}>
+        <EuiRange
+          id="mySlider"
+          min={1}
+          max={10}
+          value={value}
+          onChange={onChange}
+          aria-label="An example of EuiRange with showValue prop"
+        />
+        <EuiBadge color={badgeDetails.color}>{badgeDetails.text}</EuiBadge>
+      </EuiPanel>
     </div>
   );
 }
